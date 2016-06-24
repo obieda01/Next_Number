@@ -1,39 +1,35 @@
-package Q13_06_Object_Reflection;
+package Q13_05_TreeMap_HashMap_LinkedHashMap;
 
-import java.lang.reflect.*;
+import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.TreeMap;
 
 public class Question {
-	public static void main(String args[]) {
-		try {
-			/* Parameters */
-			Object[] doubleArgs = new Object[] { 4.2, 3.9 };
-			
-			/* Get class */
-			Class rectangleDefinition = Class.forName("Question14_5.Rectangle");
-			
-			/* Equivalent: Rectangle rectangle = new Rectangle(4.2, 3.9); */
-			Class[] doubleArgsClass = new Class[] {double.class, double.class};
-			Constructor doubleArgsConstructor = rectangleDefinition.getConstructor(doubleArgsClass);
-			Rectangle rectangle = (Rectangle) doubleArgsConstructor.newInstance(doubleArgs);
-			
-			/* Equivalent: Double area = rectangle.area(); */
-			Method m = rectangleDefinition.getDeclaredMethod("area");
-			Double area = (Double) m.invoke(rectangle);
-			
-			System.out.println(area);
-		} catch (ClassNotFoundException e) {
-			System.out.println(e);
-		} catch (NoSuchMethodException e) {
-			System.out.println(e);
-		} catch (IllegalArgumentException e) {
-			System.out.println(e);
-		} catch (IllegalAccessException e) {
-			System.out.println(e);
-		} catch (InvocationTargetException e) {
-			System.out.println(e);
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public static void insertAndPrint(AbstractMap<Integer, String> map) {
+		int[] array = {1, -1, 0};
+		for (int x : array) {
+			map.put(x, Integer.toString(x));
+		}
+		
+		for (int k : map.keySet()) {
+			System.out.print(k + ", ");
 		}
 	}
+	
+	public static void main(String[] args) {
+		TreeMap<Integer, String> treeMap = new TreeMap<Integer, String>();
+		HashMap<Integer, String> hashMap = new HashMap<Integer, String>();
+		LinkedHashMap<Integer, String> linkedHashMap = new LinkedHashMap<Integer, String>();
+		
+		System.out.println("\nHashMap - Arbitrary Order:");
+		insertAndPrint(hashMap);
+		
+		System.out.println("\nLinkedHashMap - Insertion Order:");
+		insertAndPrint(linkedHashMap);
+
+		System.out.println("\nTreeMap - Natural Order:");
+		insertAndPrint(treeMap);
+	}
+
 }
