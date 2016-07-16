@@ -1,4 +1,10 @@
+package Q5_04_Next_Number;
 
+public class Tester {
+	public static void binPrint(int i) {
+		System.out.println(i + ": " + Integer.toBinaryString(i));		
+	}
+	
 	public static void main(String[] args) {
 		for (int i = 0; i < 200; i++) {
 			int p1 = QuestionA.getPrevSlow(i);
